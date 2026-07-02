@@ -828,51 +828,7 @@ body.open-nav {
         transform: scaleX(1);
     }
 
-    .site-nav__item {
-    position: relative;
-}
-
-    .site-nav__submenu {
-        position: absolute;
-        top: calc(100% + 1rem);
-        left: 0;
-
-        min-width: 260px;
-
-        background: var(--gradient-primary);
-
-        list-style: none;
-        padding: .75rem 0;
-        margin: 0;
-
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(10px);
-
-        transition:
-            opacity .25s ease,
-            transform .25s ease,
-            visibility .25s;
-
-        z-index: 100;
-    }
-
-    .site-nav__submenu li {
-        width: 100%;
-    }
-
-    .site-nav__submenu a {
-        display: block;
-        padding: .75rem 1.25rem;
-        white-space: nowrap;
-    }
-
-    .site-nav__item:hover .site-nav__submenu,
-    .site-nav__item:focus-within .site-nav__submenu {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
-    }
+   
 }
 
 @media (min-width: 1440px) { 
