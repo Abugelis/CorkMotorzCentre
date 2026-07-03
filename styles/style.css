@@ -14,11 +14,11 @@ html {
     scroll-behavior: smooth;
     background-color: #FAF7F2;
     overflow-x: hidden;
-    overflow-y: hidden;
 }
 
 body {
     min-height: 100dvh;
+    overflow-y: hidden;
 }
 
 /* ---------------------------- ELEMENTS ------------------------------- */
