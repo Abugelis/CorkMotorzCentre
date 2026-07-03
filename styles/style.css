@@ -12,12 +12,13 @@
 
 html {
     scroll-behavior: smooth;
-    background-color: #FAF7F2;
+    background: red;
     overflow-x: hidden;
 }
 
 body {
     min-height: 100dvh;
+    background: white;
 }
 
 /* ---------------------------- ELEMENTS ------------------------------- */
