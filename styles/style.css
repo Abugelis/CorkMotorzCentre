@@ -13,10 +13,11 @@
 html {
     scroll-behavior: smooth;
     background-color: #FAF7F2;
+    overflow-x: hidden;
 }
 
 body {
-    min-height: 100svh;
+    min-height: 100dvh;
 }
 
 /* ---------------------------- ELEMENTS ------------------------------- */
@@ -610,7 +611,7 @@ body.open-nav {
     right: 0;
 
     width: 70%;
-    height: 100svh;
+    height: 100dvh;
 
     display: flex;
     flex-direction: column;
@@ -878,7 +879,7 @@ body.open-nav {
 .hero-section img {
     position: relative;
     width: 100%;
-    height: 60svh;
+    height: 60dvh;
     object-fit: cover;
     z-index: 0;
 }
@@ -923,7 +924,7 @@ body.open-nav {
 @media (min-width: 768px) {
 
     .hero-section img {
-        height: 65svh;
+        height: 65dvh;
     }
 
     .hero-content {
@@ -939,7 +940,7 @@ body.open-nav {
 @media (min-width: 1024px) {
 
     .hero-section img {
-        height: 70svh;
+        height: 70dvh;
     }
 
     .hero-content {
@@ -952,7 +953,7 @@ body.open-nav {
 @media (min-width: 1440px) {
 
     .hero-section img {
-        height: 80svh;
+        height: 80dvh;
     }
 
     .hero-content {
@@ -964,7 +965,7 @@ body.open-nav {
 @media (min-width: 1920px) {
 
     .hero-section img {
-        height: 60svh;
+        height: 60dvh;
     }
 
     .hero-content {
