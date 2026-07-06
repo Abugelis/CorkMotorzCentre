@@ -29,19 +29,35 @@
 
             <div class="site-nav__container container">
                 
-                <a href="../index.html" class="site-nav__brand">
-                    <img class="site-nav__logo" src="../assets/logos/cork-motorz-centre-logo.webp" alt="Example Logo">
+                <a href="/index.html" class="site-nav__brand">
+                    <img class="site-nav__logo" src="/assets/logos/cork-motorz-centre-logo.webp" alt="Example Logo">
                 </a>
 
                 <nav class="site-nav__links" id="primary-navigation" aria-label="Primary navigation">
                     <ul>
-                        <li><a href="../index.html">Home</a></li>
-                        <li><a href="../about.html">About Us</a></li>
-                        <li><a href="../service/service.html">Services</a></li>
-                        <li><a href="../news.html">News</a></li>
-                        <li><a href="../contact.html">Contact Us</a></li>
-                        <li><a href="../vehicle-recovery.html">Vehicle Recovery</a></li>
-                        <li><a href="../dpf-cleaning.html">DPF Cleaning</a></li>
+                        <li><a href="/index.html">Home</a></li>
+                        <li><a href="/about.html">About Us</a></li>
+                        <li class="has-submenu">
+                            <a href="/service/service.html">Services</a>
+                            <button class="submenu-toggle" aria-expanded="false" aria-controls="services-submenu">
+                                <span class="submenu-arrow" aria-hidden="true">▾</span>
+                                <span class="sr-only">Toggle Services submenu</span>
+                            </button>
+                            <ul class="sub-menu" id="services-submenu">
+                                <li><a href="/dpf-cleaning.html">DPF Cleaning</a></li>
+                                <li><a href="/service/service-and-maintenance.html">Full Service & Maintenance</a></li>
+                                <li><a href="/service/diagnostics.html">Diagnostics</a></li>
+                                <li><a href="/service/tyres.html">Tyres</a></li>
+                                <li><a href="/vehicle-recovery.html">Recovery Service</a></li>
+                                <li><a href="/service/crash-repairs.html">Car Crash Repairs</a></li>
+                                <li><a href="/service/car-wash.html">Car Wash & Valeting</a></li>
+                                <li><a href="/service/pre-nct.html">Pre-NCT Inspection</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="/news.html">News</a></li>
+                        <li><a href="/contact.html">Contact Us</a></li>
+                        <li><a href="/vehicle-recovery.html">Vehicle Recovery</a></li>
+                        <li><a href="/dpf-cleaning.html">DPF Cleaning</a></li>
                     </ul>
                 </nav>
 
@@ -62,7 +78,7 @@
             <section class="hero-section section">
                 <img src="../assets/images/services-bg.jpg" alt="Cork Motorz Centre Hero Background Image">
                 <div class="hero-overlay"></div>
-                <div class="maintenance-hero container fade-in">
+                <div class="hero-content container fade-in">
                     <h1>Car Service & Vehicle Maintenance in Cork</h1>
                     <p>Expert Car Servicing, Diagnostics & Maintenance for All Makes and Models in Cork</p>
                     <a href="tel:0852352555" class="btn-primary">Call Us</a>
@@ -103,7 +119,7 @@
 
                     <br>
 
-                    <img class="fade-in" src="../assets/images/maintenance.webp" alt="">
+                    <img class="article-img fade-in" src="../assets/images/maintenance.webp" alt="">
 
                     <br>
 
@@ -179,5 +195,8 @@
                 <div class="footer-ps"><p> © 2026 Cork Motorz Centre <br>Website Designed by <a href="https://eg-webdev.com/">EG Web Dev</a></p></div>
             </div>
         </footer>
+        <button id="backToTop" aria-label="Back to top">
+            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M5.14645 7.14645L7.64645 4.64645C7.84171 4.45118 8.15829 4.45118 8.35355 4.64645L10.8536 7.14645C11.0488 7.34171 11.0488 7.65829 10.8536 7.85355C10.6583 8.04882 10.3417 8.04882 10.1464 7.85355L8.5 6.20711V11C8.5 11.2761 8.27614 11.5 8 11.5C7.72386 11.5 7.5 11.2761 7.5 11V6.20711L5.85355 7.85355C5.65829 8.04882 5.34171 8.04882 5.14645 7.85355C4.95118 7.65829 4.95118 7.34171 5.14645 7.14645ZM8 1C4.13401 1 1 4.13401 1 8C1 11.866 4.13401 15 8 15C11.866 15 15 11.866 15 8C15 4.13401 11.866 1 8 1ZM2 8C2 4.68629 4.68629 2 8 2C11.3137 2 14 4.68629 14 8C14 11.3137 11.3137 14 8 14C4.68629 14 2 11.3137 2 8Z"/></svg>
+        </button>
     </body>
 </html>

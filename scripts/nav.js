@@ -54,3 +54,31 @@ navLinks.forEach(link => {
 });
 
 
+// ------------------------------------------------------------------- SUBMENU -------------------------------------------------------------------
+document.querySelectorAll('.submenu-toggle').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+        const expanded = btn.getAttribute('aria-expanded') === 'true';
+        const submenu = document.getElementById(btn.getAttribute('aria-controls'));
+
+        btn.setAttribute('aria-expanded', String(!expanded));
+        submenu.classList.toggle('is-open', !expanded);
+    });
+});
+
+// ------------------------------------------------------------------- BACK TO TOP -------------------------------------------------------------------
+
+const backToTop = document.getElementById("backToTop");
+
+window.addEventListener("scroll", () => {
+    if (window.scrollY > 300) {
+        backToTop.classList.add("show");
+    } else {
+        backToTop.classList.remove("show");
+    }
+});
+
+backToTop.addEventListener("click", () => {
+    window.scrollTo({
+        top: 0,
+    });
+});

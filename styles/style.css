@@ -345,7 +345,7 @@ img {
 
 @media (min-width: 1920px) {
     :root {
-        --container-padding: 0rem;
+        --container-padding: 0;
         --container-width: 1600px;
     }
 
@@ -421,6 +421,71 @@ img {
     opacity: 1;
     transform: translateY(0);
 }
+
+/* ------------------------------- Article Img -----------------------------------*/
+
+.article-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--radius);
+    box-shadow: 1px 1px 8px var(--color-neutral-dark);
+}
+
+@media(min-width: 1024px) { 
+
+    .article-img {
+        height: 500px;
+    }
+}
+
+@media(min-width: 1440px) {
+
+    .article-img {
+        height: 600px;
+    } 
+}
+
+@media(min-width: 1920px) {
+
+    .article-img {
+        height: 800px;
+    } 
+}
+
+/* -------------------------------- Back to Top Btn ---------------------------------- */
+
+#backToTop {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    width: 50px;
+    height: 50px;
+    border: none;
+    border-radius: 50%;
+    background: var(--color-accent);
+    color: var(--color-neutral-dark);
+    font-size: 28px;
+    cursor: pointer;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    z-index: 1000;
+}
+
+#backToTop:hover {
+    background: var(--color-accent);
+    transform: translateY(0) scale(1.05);
+}
+
+#backToTop.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
 
 /* -------------------------------- CTA ----------------------------------------- */
 
@@ -616,8 +681,7 @@ body.open-nav {
 
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    align-items: center;
+
 
     background: var(--gradient-primary);
 
@@ -632,15 +696,25 @@ body.open-nav {
                 visibility 0s;
 
     z-index: var(--layer-menu);
+
+    /* ADD THESE */
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior: contain;
+
+    padding-bottom: 4rem;
 }
 
 .site-nav__links ul {
     display: flex;
     flex-direction: column;
     gap: 1rem;
-    text-align: center;
     width: 100%;
+    align-items: flex-start;
+    padding-left: 2rem;
+    padding-top: 8rem;
 }
+
 
 
 /* OPEN STATE */
@@ -663,14 +737,24 @@ body.open-nav {
     font-weight: 500;
 }
 
-/* Decorative separation line on mobile menu */
-.site-nav__links a::after {
-    content: "";
-    display: block;
-    height: 1px;
-    width: 60%;
-    background: var(--color-accent-alt);
-    margin: 0.5rem auto;   
+.site-nav__links > ul > li {
+    border-bottom: 1px solid var(--color-accent-alt);
+    padding-bottom: 0.5rem;
+    width: 90%;
+}
+
+.site-nav__links .sub-menu li {
+    border-bottom: 1px solid var(--color-neutral-dark);
+    padding-bottom: 0.5rem;
+    width: 100%;
+}
+
+.site-nav__links .sub-menu li:last-child {
+    border-bottom: none;
+}
+
+.site-nav__links li:last-child {
+    border-bottom: none;
 }
 
 .site-nav__links a:hover {
@@ -741,7 +825,80 @@ body.open-nav {
     background-color: var(--color-section-soft);
 }
 
+/* ----------------------------------------------------------------------- SUBMENU ---------------------------------------------------------------- */
 
+/* Make the li a positioning context so the button sits beside the link */
+.site-nav__links .has-submenu {
+    position: relative;
+}
+
+.site-nav__links .has-submenu > a {
+    display: inline-block;
+}
+
+/* The toggle button, placed on the right */
+.submenu-toggle {
+    position: absolute;
+    top: 0;
+    right: 0;
+
+    background: none;
+    border: none;
+    padding: 0.5em 1em;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.submenu-arrow {
+    display: inline-block;
+    font-size: 2.1rem;
+    transition: transform 0.25s ease;
+    color: var(--color-accent-alt);
+    padding: 0;
+    margin: -1.2rem 0 0 0;
+}
+
+/* Rotate arrow when expanded */
+.submenu-toggle[aria-expanded="true"] .submenu-arrow {
+    transform: rotate(180deg);
+}
+
+/* Submenu collapsed by default */
+.site-nav__links .sub-menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+/* Expanded state */
+.site-nav__links .sub-menu.is-open {
+    max-height: 600px; /* large enough to fit all items */
+    padding-top: 1rem;
+}
+
+/* Indent submenu items */
+.site-nav__links .sub-menu li a {
+    padding-left: 2em;
+    display: block;
+}
+
+/* Visually hidden helper text for the button label */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
 
 
 @media (max-width: 768px) {
@@ -753,14 +910,8 @@ body.open-nav {
 
 }
 
-@media (min-width: 768px) {
-    
-    
-}
-
 @media (min-width: 1024px) {
 
-    
 
     .site-nav__toggle {
         display: none;
@@ -827,6 +978,91 @@ body.open-nav {
         transform: scaleX(1);
     }
 
+    /* Desktop doesn't need the click-to-expand arrow — hover handles it */
+    .submenu-toggle {
+        display: none;
+    }
+
+    .site-nav__links {
+        overflow: visible;
+        -webkit-overflow-scrolling: auto;
+        overscroll-behavior: auto;
+    }
+
+    /* Undo the mobile min-height/flex centering trick — it was only
+       needed to make room for the arrow button + separator line */
+    .site-nav__links .has-submenu {
+        min-height: auto;
+        display: flex;
+        align-items: center;
+    }
+
+    /* Turn the submenu into a dropdown instead of an inline accordion */
+    .site-nav__links .sub-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+
+        width: 390px;
+        max-height: none;
+        overflow: visible;
+
+        flex-direction: column;
+        gap: 0;
+
+        background: var(--gradient-primary);
+        padding: 0.5rem 0;
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.18);
+
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateY(8px);
+
+        transition: opacity 0.25s ease,
+                    transform 0.25s ease,
+                    visibility 0s linear 0.25s;
+
+        z-index: 20;
+    }
+
+    /* Show on hover OR keyboard focus within the item */
+    .site-nav__links .has-submenu:hover .sub-menu,
+    .site-nav__links .has-submenu:focus-within .sub-menu {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+        transform: translateY(0);
+
+        transition: opacity 0.25s ease,
+                    transform 0.25s ease,
+                    visibility 0s linear 0s;
+    }
+
+    /* Dropdown items don't need mobile's deep indent */
+    .site-nav__links .sub-menu li a {
+        padding-left: 1.5rem;
+        padding-right: 1.5rem;
+    }
+
+    .site-nav__links > ul > li {
+        border-bottom: none;
+    }
+
+    .site-nav__links ul > li {
+        width: auto;
+        flex: none; /* prevents flex-grow/shrink from squeezing items */
+    }
+
+    .site-nav__links a {
+        white-space: nowrap; /* belt-and-braces: never wrap link text */
+    }
+
+    .site-nav__links ul {
+        padding-top: 4rem;
+        align-items: center; /* vertically center items within the row */
+    }
+
    
 }
 
@@ -880,7 +1116,7 @@ body.open-nav {
 .hero-section img {
     position: relative;
     width: 100%;
-    height: 60dvh;
+    height: 90dvh;
     object-fit: cover;
     z-index: 0;
 }
@@ -889,9 +1125,11 @@ body.open-nav {
     inset: 0;
     position: absolute;
     background-color: rgba(0, 0, 0, 0.7);
-    z-index: 1;
+    
     top: 0;
     left: 0;
+
+    z-index: 1;
 }
 
 .hero-content h1 {
@@ -900,21 +1138,16 @@ body.open-nav {
 
 .hero-content {
     position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 2;
-
-    margin: 4rem 0;
-
-    display: flex;
-    flex-direction: column;
+    top: 10rem;
 
     display: flex;
     flex-direction: column;
     
     color: var(--color-secondary);
-    width: 20rem;
+    width: 90%;
     text-shadow: 1px 1px 1px var(--color-primary);
+
+    z-index: 2;
 }
 
 .hero-content p {
@@ -924,55 +1157,19 @@ body.open-nav {
 
 @media (min-width: 768px) {
 
-    .hero-section img {
-        height: 65dvh;
-    }
-
     .hero-content {
-        width: 30rem;
+        left: 10rem;
     }
-
-    .btn-primary {
-        max-width: 12rem;
-    }
-    
-}
-
-@media (min-width: 1024px) {
-
-    .hero-section img {
-        height: 70dvh;
-    }
-
-    .hero-content {
-        width: 40rem;
-        margin: 5rem 0;
-    }
-    
-}
-
-@media (min-width: 1440px) {
 
     .hero-section img {
         height: 80dvh;
     }
 
-    .hero-content {
-        width: 60rem;
-        margin: 6.5rem 0;
+    .btn-primary {
+        max-width: 20rem;
+        max-height: 6rem;
     }
-}
-
-@media (min-width: 1920px) {
-
-    .hero-section img {
-        height: 60dvh;
-    }
-
-    .hero-content {
-        width: 60rem;
-        margin: 6.5rem 10rem;
-    }
+    
 }
 
 /* ================================================================  HERO CAROUSEL ================================================================================= */
@@ -1740,30 +1937,6 @@ body.open-nav {
 
 /* ----------------------------------------------------------------      RECOVERY     ------------------------------------------------------------------------------- */
 
-.recovery-hero-content {
-
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 2;
-
-    margin: 7rem 0;
-
-    display: flex;
-    flex-direction: column;
-
-    display: flex;
-    flex-direction: column;
-    
-    color: var(--color-secondary);
-    width: 24rem;
-    text-shadow: 1px 1px 1px var(--color-primary);
-}
-
-.recovery-hero-content p {
-
-    margin-bottom: 4rem;
-}
 
 .recovery-checklist > li {
     display: flex;
@@ -1781,55 +1954,6 @@ body.open-nav {
     color: var(--color-accent);
 }
 
-.recovery-section img {
-    border-radius: var(--radius);
-    box-shadow: 1px 1px 8px var(--color-neutral-dark);
-    width: 100%;
-    height: auto;
-}
-
-@media(min-width: 768px) {
-
-    .recovery-hero-content { 
-        width: 34rem;
-    }
-
-}
-
-@media(min-width: 1024px) { 
-
-    .recovery-hero-content { 
-        width: 40rem;
-    }
-
-    .recovery-section img {
-        height: 500px;
-        object-fit: cover;
-    }
-}
-
-@media(min-width: 1440px) {
-
-    .recovery-hero-content { 
-        width: 52rem;
-        margin-top: 12rem;
-    }
-
-    .recovery-section img {
-        height: 600px;
-        object-fit: cover;
-    }
-    
-}
-
-@media(min-width: 1920px) { 
-
-    .recovery-hero-content { 
-        width: 42rem;
-        margin-top: 4rem;
-        margin-left: 10rem;
-    }
-}
 
 /* ----------------------------------------------------------------      DPF CLEANING     ------------------------------------------------------------------------------- */
 
@@ -1844,15 +1968,12 @@ body.open-nav {
     height: 14rem;
 }
 
-.dpf-cleaning img {
-    border-radius: var(--radius);
-    box-shadow: 1px 1px 8px var(--color-neutral-dark);
-    width: 100%;
-    height: auto;
-}
-
 .dpf-cleaning a {
     color: var(--color-accent);
+}
+
+.dpf-img {
+    object-position: 40% 80%;
 }
 
 @media(min-width: 768px) {
@@ -1871,11 +1992,6 @@ body.open-nav {
         height: 30rem;
     }
 
-    .dpf-cleaning img {
-        height: 500px;
-        object-fit: cover;
-    }
-
     #dpf-lights {
         height: 100%;
         scale: 0.8;
@@ -1883,12 +1999,6 @@ body.open-nav {
 }
 
 @media(min-width: 1440px) {
-
-
-    .dpf-cleaning img {
-        height: 600px;
-        object-fit: cover;
-    }
     
     .dpf-cleaning iframe{
         width: 80%;
@@ -1898,29 +2008,6 @@ body.open-nav {
 
 /* ----------------------------------------------------------------      MAINTENANCE     ------------------------------------------------------------------------------- */
 
-.maintenance-hero {
-
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 2;
-
-    margin: 4rem 0;
-
-    display: flex;
-    flex-direction: column;
-
-    display: flex;
-    flex-direction: column;
-    
-    color: var(--color-secondary);
-    width: 24rem;
-    text-shadow: 1px 1px 1px var(--color-primary);
-}
-
-.maintenance-hero p {
-    margin-bottom: 2rem;
-}
 
 .maintenance-article ul {
     list-style: disc;
@@ -1931,313 +2018,14 @@ body.open-nav {
     color: var(--color-accent);
 }
 
-.maintenance-article img {
-    border-radius: var(--radius);
-    box-shadow: 1px 1px 8px var(--color-neutral-dark);
-    width: 100%;
-    height: auto;
-}
-
-@media(min-width:768px) {
-    .maintenance-hero {
-        width: 40rem;
-        margin: 6rem 0;
-    }
-
-    .maintenance-hero p {
-        margin-bottom: 4rem;
-    }
-}
-
-@media(min-width: 1024px) { 
-
-    .maintenance-hero { 
-        width: 50rem;
-    }
-
-    .maintenance-article img {
-        height: 500px;
-        object-fit: cover;
-    }
-}
-
-@media(min-width: 1440px) {
-
-
-    .maintenance-article img {
-        height: 600px;
-        object-fit: cover;
-    }
-}
-
-@media(min-width: 1920px) { 
-
-    .maintenance-hero { 
-        width: 42rem;
-        margin-top: 4rem;
-        margin-left: 10rem;
-    }
-}
-
 
 /* ----------------------------------------------------------------      DIAGNOSTICS     ------------------------------------------------------------------------------- */
 
-.diagnostics-hero{
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 2;
-
-    margin: 8rem 0;
-
-    display: flex;
-    flex-direction: column;
-
-    display: flex;
-    flex-direction: column;
-    
-    color: var(--color-secondary);
-    width: 24rem;
-    text-shadow: 1px 1px 1px var(--color-primary);
-}
-
-.diagnostics-hero p {
-    margin-bottom: 4rem;
-}
-
-
-@media(min-width:768px) {
-    .diagnostics-hero {
-        width: 40rem;
-        margin: 6rem 0;
-    }
-
-    .maintenance-hero p {
-        margin-bottom: 4rem;
-    }
-}
-
-@media(min-width: 1024px) { 
-
-    .diagnostics-hero { 
-        width: 50rem;
-        margin: 8rem 0;
-    }
-
-    .maintenance-article img {
-        height: 500px;
-        object-fit: cover;
-    }
-}
-
-@media(min-width: 1440px) {
-
-
-    .maintenance-article img {
-        height: 600px;
-        object-fit: cover;
-    }
-}
-
-@media(min-width: 1920px) { 
-
-    .diagnostics-hero { 
-        width: 42rem;
-        margin-top: 4rem;
-        margin-left: 10rem;
-    }
-}
 
 /* ----------------------------------------------------------------      TYRES     ------------------------------------------------------------------------------- */
 
-.tyres-hero {
-
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 2;
-
-    margin: 8rem 0;
-
-    display: flex;
-    flex-direction: column;
-
-    display: flex;
-    flex-direction: column;
-    
-    color: var(--color-secondary);
-    width: 24rem;
-    text-shadow: 1px 1px 1px var(--color-primary);
-}
-
-.tyres-hero p {
-    margin-bottom: 4rem;
-}
-
-@media(min-width:768px) {
-    .tyres-hero {
-        width: 40rem;
-        margin: 6rem 0;
-    }
-
-    .tyres-hero p {
-        margin-bottom: 4rem;
-    }
-}
-
-@media(min-width: 1024px) { 
-
-    .tyres-hero { 
-        width: 50rem;
-        margin: 8rem 0;
-    }
-
-    .maintenance-article img {
-        height: 500px;
-        object-fit: cover;
-    }
-}
-
-@media(min-width: 1440px) {
-
-    .tyres-hero { 
-        margin: 10rem 0;
-    }
-
-    .maintenance-article img {
-        height: 600px;
-        object-fit: cover;
-    }
-}
-
-@media(min-width: 1920px) { 
-
-    .tyres-hero { 
-        width: 42rem;
-        margin-top: 8rem;
-        margin-left: 10rem;
-    }
-}
 
 /* ----------------------------------------------------------------      CRASH REPAIRS     ------------------------------------------------------------------------------- */
 
-.crash-hero {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 2;
-
-    margin: 4rem 0;
-
-    display: flex;
-    flex-direction: column;
-
-    display: flex;
-    flex-direction: column;
-    
-    color: var(--color-secondary);
-    width: 24rem;
-    text-shadow: 1px 1px 1px var(--color-primary);
-}
-
-.crash-hero p {
-    margin-bottom: 4rem;
-}
-
-@media(min-width:768px) {
-    .crash-hero {
-        width: 40rem;
-        margin: 6rem 0;
-    }
-
-    .crash-hero p {
-        margin-bottom: 4rem;
-    }
-}
-
-@media(min-width: 1024px) { 
-
-    .crash-hero { 
-        width: 50rem;
-        margin: 8rem 0;
-    }
-
-    .maintenance-article img {
-        height: 500px;
-        object-fit: cover;
-    }
-}
-
-@media(min-width: 1440px) {
-
-    .maintenance-article img {
-        height: 600px;
-        object-fit: cover;
-    }
-}
-
-@media(min-width: 1920px) { 
-
-    .crash-hero { 
-        width: 42rem;
-        margin-top: 4rem;
-        margin-left: 10rem;
-    }
-}
 
 /* ----------------------------------------------------------------      VALETING     ------------------------------------------------------------------------------- */
-
-.valet-hero {
-    position: absolute;
-    top: 0;
-    left: 0;
-    z-index: 2;
-
-    margin: 6rem 0;
-
-    display: flex;
-    flex-direction: column;
-
-    display: flex;
-    flex-direction: column;
-    
-    color: var(--color-secondary);
-    width: 24rem;
-    text-shadow: 1px 1px 1px var(--color-primary);
-}
-
-.valet-hero p {
-    margin-bottom: 4rem;
-}
-
-@media(min-width:768px) {
-    .valet-hero {
-        width: 40rem;
-        margin: 6rem 0;
-    }
-}
-
-@media(min-width: 1024px) { 
-
-    .valet-hero { 
-        width: 50rem;
-        margin: 8rem 0;
-    }
-}
-
-@media(min-width: 1440px) {
-
-    .maintenance-article img {
-        height: 600px;
-        object-fit: cover;
-    }
-}
-
-@media(min-width: 1920px) { 
-
-    .valet-hero { 
-        width: 42rem;
-        margin-top: 4rem;
-        margin-left: 10rem;
-    }
-}

@@ -18,7 +18,7 @@
 
         <title>Cork Motorz Centre | About Us</title>
         
-        <link rel="stylesheet" href="../CorkMotorzCentre/styles/style.css">
+        <link rel="stylesheet" href="/styles/style.css">
         <script src="../CorkMotorzCentre/scripts/nav.js" defer></script>
         <script src="../CorkMotorzCentre/scripts/fade-in.js" defer></script>
         
@@ -38,7 +38,23 @@
                     <ul>
                         <li><a href="../CorkMotorzCentre/index.html">Home</a></li>
                         <li><a href="../CorkMotorzCentre/about.html">About Us</a></li>
-                        <li><a href="../CorkMotorzCentre/service/service.html">Services</a></li>
+                        <li class="has-submenu">
+                            <a href="../CorkMotorzCentre/service/service.html">Services</a>
+                            <button class="submenu-toggle" aria-expanded="false" aria-controls="services-submenu">
+                                <span class="submenu-arrow" aria-hidden="true">▾</span>
+                                <span class="sr-only">Toggle Services submenu</span>
+                            </button>
+                            <ul class="sub-menu" id="services-submenu">
+                                <li><a href="../CorkMotorzCentre/dpf-cleaning.html">DPF Cleaning</a></li>
+                                <li><a href="../CorkMotorzCentre/service/service-and-maintenance.html">Full Service & Maintenance</a></li>
+                                <li><a href="../CorkMotorzCentre/service/diagnostics.html">Diagnostics</a></li>
+                                <li><a href="../CorkMotorzCentre/service/tyres.html">Tyres</a></li>
+                                <li><a href="../CorkMotorzCentre/vehicle-recovery.html">Recovery Service</a></li>
+                                <li><a href="../CorkMotorzCentre/service/crash-repairs.html">Car Crash Repairs</a></li>
+                                <li><a href="../CorkMotorzCentre/service/car-wash.html">Car Wash & Valeting</a></li>
+                                <li><a href="../CorkMotorzCentre/service/pre-nct.html">Pre-NCT Inspection</a></li>
+                            </ul>
+                        </li>
                         <li><a href="../CorkMotorzCentre/news.html">News</a></li>
                         <li><a href="../CorkMotorzCentre/contact.html">Contact Us</a></li>
                         <li><a href="../CorkMotorzCentre/vehicle-recovery.html">Vehicle Recovery</a></li>
@@ -114,5 +130,8 @@
                 <div class="footer-ps"><p> © 2026 Cork Motorz Centre <br>Website Designed by <a href="https://eg-webdev.com/">EG Web Dev</a></p></div>
             </div>
         </footer>
+        <button id="backToTop" aria-label="Back to top">
+            <svg viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="currentColor"><path d="M5.14645 7.14645L7.64645 4.64645C7.84171 4.45118 8.15829 4.45118 8.35355 4.64645L10.8536 7.14645C11.0488 7.34171 11.0488 7.65829 10.8536 7.85355C10.6583 8.04882 10.3417 8.04882 10.1464 7.85355L8.5 6.20711V11C8.5 11.2761 8.27614 11.5 8 11.5C7.72386 11.5 7.5 11.2761 7.5 11V6.20711L5.85355 7.85355C5.65829 8.04882 5.34171 8.04882 5.14645 7.85355C4.95118 7.65829 4.95118 7.34171 5.14645 7.14645ZM8 1C4.13401 1 1 4.13401 1 8C1 11.866 4.13401 15 8 15C11.866 15 15 11.866 15 8C15 4.13401 11.866 1 8 1ZM2 8C2 4.68629 4.68629 2 8 2C11.3137 2 14 4.68629 14 8C14 11.3137 11.3137 14 8 14C4.68629 14 2 11.3137 2 8Z"/></svg>
+        </button>
     </body>
 </html>
